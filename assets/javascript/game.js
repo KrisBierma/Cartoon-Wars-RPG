@@ -1,27 +1,118 @@
 //to start, click on char
     //that char goes to "your char" and stays white
     //other char go to "enemies" and turns red
+$(document).ready(function(){
 
-$("#marvin").on("click", function(){
-    var marvinStorage =$("#marvin").detach();
-    $("#yourChar").append(marvinStorage);
+var marvin = $("#marvin"); 
+var pepe=$("#pepe");
+var popeye = $("#popeye");
+var rosie = $("#rosie");
+var storage=[marvin, pepe, popeye, rosie];
+var threeEnemies =[];
+var run=0;
 
-    var pepeStorage=$("#pepe").detach();
-    pepeStorage.addClass("charBox-enemies");
-    $("#enemies").append(pepeStorage);
-    
-    var popeyeStorage=$("#popeye").detach();
-    popeyeStorage.addClass("charBox-enemies");
-    $("#enemies").append(popeyeStorage);
+chooseYourChar();
+//chooseDefender();
 
-    var rosieStorage=$("#rosie").detach();
-    rosieStorage.addClass("charBox-enemies");
-    $("#enemies").append(rosieStorage);
-})
+function chooseYourChar(){
+    //var run=0;
+    $("#marvin").on("click", function(){
+        while(run<3){
+            for (var i=0; i<4; i++){
+                $(storage[i]).detach();
+            
+                if (storage[i]===marvin){
+                    $("#yourChar").append(storage[i])
+                }
+                else {
+                    storage[i].addClass("charBox-enemies");
+                    $("#enemies").append(storage[i]);
+                    threeEnemies[i]=storage[i];
+                    console.log(threeEnemies);
+                    run++;
+                    console.log(run);
+                    }
+            }
+            chooseDefender();
+        }})
+
+    $("#pepe").on("click", function(){
+        while(run<3){
+            for (var i=0; i<4; i++){
+                $(storage[i]).detach();
+                
+                if (storage[i]===pepe){
+                    $("#yourChar").append(storage[i])
+                }
+                else {
+                    storage[i].addClass("charBox-enemies");
+                    $("#enemies").append(storage[i]);
+                    threeEnemies[i]=storage[i];
+                    run++;
+        }}}})
+
+    $("#popeye").on("click", function(){
+        while(run<3){
+            for (var i=0; i<4; i++){
+            $(storage[i]).detach();
+            
+            if (storage[i]===popeye){
+                $("#yourChar").append(storage[i])
+            }
+            else {
+                storage[i].addClass("charBox-enemies");
+                $("#enemies").append(storage[i]);
+                threeEnemies[i]=storage[i];
+                run++;
+    }}}})
+
+    $("#rosie").on("click", function(){
+        while(run<3){
+            for (var i=0; i<4; i++){
+            $(storage[i]).detach();
+            
+            if (storage[i]===rosie){
+                $("#yourChar").append(storage[i])
+            }
+            else {
+                storage[i].addClass("charBox-enemies");
+                $("#enemies").append(storage[i]);
+                threeEnemies[i]=storage[i];
+                run++;
+    }}}})
+} //end chooseYourChar function
+
+function chooseDefender(){ 
+    $("#marvin").on("click", function(){
+        console.log("running");
+        if (threeEnemies[0]===undefined){
+            console.log("can't do this");
+        }
+        else if ()
+        
+cycle through threeEnemies array and move one click to #fight
 
 
+
+        $(storage[0]).detach();
+        $("#fight").append(storage[0]);
+    })
+ }
+    })
 //click on enemy
     //that char goes to "defender" and turns black
-$
+//$
 
+//click attack
+//reduce hp of char and defender
+//if char hp =0, lose game; "You've been defeated...GAME OVER" & button "restart"
+//marvin damage 8, pepe damage 12, popeye damage 16, rosie damage 20
+//script shows up "You attacked snoopy for 8 damage. <br> snoopy attacked you back for 25 damage"
+//each attack, char increase attack by that number 8, 16, 24. enemy attack stays the same 25
+//if enemy hp is 0 it's removed.
+//text reads "You have defeated Marvin. Choose another enemy to fight."
+//if attack is clicked again "No enemy here."
+//choose another character
+//char attack power is still increasing
+//You won! Game over & restart button
 
