@@ -1,27 +1,47 @@
-//to start, click on char
-    //that char goes to "your char" and stays white
-    //other char go to "enemies" and turns red
 $(document).ready(function(){
 
-// var marvin = {
-//     location: $("#marvin"),
-//     hp: 100,
-//     hits: 10
-// }
+var marvin = {
+    name:"marvin",
+    location: $("#marvin"),
+    hp: 100,
+    damage: 8
+    }
+var pepe = {
+    name:"pepe",
+    location: $("#pepe"),
+    hp:120,
+    damage: 12
+    }
+var popeye = {
+    name:"popeye",
+    location: $("#popeye"),
+    hp:140,
+    damage: 16
+    }
+var rosie = {
+    name:"rosie",
+    location: $("#rosie"),
+    hp:160,
+    damage: 20
+    }
 
-var marvin = $("#marvin"); 
-var pepe=$("#pepe");
-var popeye = $("#popeye");
-var rosie = $("#rosie");
 var storage=[marvin, pepe, popeye, rosie];
-var charId=["marvin", "pepe", "popeye", "rosie"];
+
+console.log(storage[0].location);
+///var marvin = $("#marvin"); 
+///var pepe=$("#pepe");
+///var popeye = $("#popeye");
+///var rosie = $("#rosie");
+///var storage=[marvin, pepe, popeye, rosie];
+///var charId=["marvin", "pepe", "popeye", "rosie"];
+
 // var threeEnemies =[];
 // var run=0;
 var isCharChosen;
 var isDefenderChosen;
 var currentDefender;
 var defenderHp;
-// var charHp;
+var charHp;
 
 function initializeGame(){
     currentDefender="";
@@ -35,7 +55,7 @@ $(".charBox").on("click", function(event){
     console.log(event.currentTarget.id); //delete later
     //if (!isDefenderChosen);
     for (var i=0; i<4; i++){
-        $(storage[i]).detach();
+        $(storage[i].location).detach();
     
         if (charId[i]===event.currentTarget.id){
             $("#yourChar").append(storage[i]);
@@ -86,7 +106,6 @@ $("#attack").on("click", function(){
     //reduce hp of defender
     //.text of defender hp
     //if char hp =0, lose game; "You've been defeated...GAME OVER" & button "restart"
-    //marvin damage 8, pepe damage 12, popeye damage 16, rosie damage 20
 
 
     //script shows up "You attacked snoopy for 8 damage. <br> snoopy attacked you back for 25 damage"
