@@ -16,7 +16,7 @@ body{
 .charBox-enemies{
     background-color:red;
 }
-.charBox-fight{background-color:black;}
+.charBox-defender{background-color:black;}
 .char{
     width:150px;
     max-height:100px;

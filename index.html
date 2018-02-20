@@ -15,10 +15,10 @@
     <h1 id="title">Cartoon Wars RPG!</h1>
 
     <div id="characters">
-        <div class="charBox" id="marvin"><p>Marvin the Martian<img src="assets/images/marvin.jpg" alt="Marvin the Martian" class="char"><p id="marvin-hp">100</div>
-        <div class="charBox" id="pepe"><p>Pepe the Cat<img src="assets/images/pepe.jpg" alt="Pepe the Cat" class="char"><p id="pepe-hp">120</div>
-        <div class="charBox" id="popeye"><p>Popeye the Sailor<img src="assets/images/popeye.png" alt="Popeye the Sailor Man" class="char"><p id="popeye-hp">140</div>
-        <div class="charBox" id="rosie"><p>Rosie the Robot<img src="assets/images/rosie-robot.jpg" alt="Rosie the Robot from the Jetsons" class="char"><p id="rosie-hp">160</div>
+        <div class="charBox" id="marvin" value="100"><p>Marvin the Martian<img src="assets/images/marvin.jpg" alt="Marvin the Martian" class="char marvin"><p id="marvin-hp">100</div>
+        <div class="charBox blah" id="pepe" value="120"><p>Pepe the Cat<img src="assets/images/pepe.jpg" alt="Pepe the Cat" class="char"><p id="pepe-hp">120</div>
+        <div class="charBox blah" id="popeye" value="140"><p>Popeye the Sailor<img src="assets/images/popeye.png" alt="Popeye the Sailor Man" class="char"><p id="popeye-hp">140</div>
+        <div class="charBox blah" id="rosie" value="160"><p>Rosie the Robot<img src="assets/images/rosie-robot.jpg" alt="Rosie the Robot from the Jetsons" class="char"><p id="rosie-hp">160</div>
     </div>
 
     <div id="yourChar">
@@ -31,13 +31,14 @@
 
     <div id="fight">
         <h2>Fight Section</h2>
-        <button>Attack</button>
+        <button id="attack">Attack</button>
     </div>
 
     <div id="defender">
         <h2>Defender</h2>
+        <p id=attackMsg></p>
     </div>
     
-    <script src="assets/javascript/game.js"></script>
+    <script src="assets/javascript/game-v2.js"></script>
 </body>
 </html>
