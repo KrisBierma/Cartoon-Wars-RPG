@@ -97,7 +97,6 @@ $(document).on("click", ".charBox-enemies", function(){
             $("#defender").append(info[j].location);
             currentDefender=info[j];
             console.log(currentDefender);
-            //defenderHp=...value; //NEED THIS
             (info[j].location).addClass("charBox-defender");
             (info[j].location).removeClass("charBox-enemies");
             isDefenderChosen=true;      
@@ -110,10 +109,6 @@ $("#attack").on("click", function(){
     if (!isCharChosen) return;
     console.log(isDoneAttacking);
     console.log(isDefenderChosen);
-    // if (isEnemyDefeated && !isDoneAttacking){
-    //     $("#attackMsg").html("No enemy here.");
-    //     console.log("no enemy");
-    //     }
     if (!isDefenderChosen) {
         console.log("running");
         return;}
@@ -145,10 +140,6 @@ $("#attack").on("click", function(){
         // enemyDown();
         console.log("running");
     } 
-    // else if(isDoneAttacking){
-    //     console.log("enemy down");
-    //     enemyDown();
-    // }
         
     else if (currentChar.hp<=0){
         if (isRestart){
@@ -166,13 +157,6 @@ $("#attack").on("click", function(){
     function capFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
         }    
-    // function enemyDown (){
-    //     isDefenderChosen=false;
-    //     isDoneAttacking=false;
-    //     isEnemyDefeated=false;
-    //     console.log("running");
-    //     $("#attackMsg").empty();
-    // }
     }) //end function #attack
 
     function enemyDown (){
