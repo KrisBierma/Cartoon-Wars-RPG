@@ -1,27 +1,27 @@
 $(document).ready(function(){
 
-var marvin = { //luke
+var marvin = {
     name:"marvin",
     location: $("#marvin"),
     hp: 120,
     hpLocation: $("#marvin-hp"),
     damage: 8
     }
-var pepe = { //obi
+var pepe = {
     name:"pepe",
     location: $("#pepe"),
     hp:130,
     hpLocation: $("#pepe-hp"),
     damage: 10
     }
-var popeye = { //sidious
+var popeye = { 
     name:"popeye",
     location: $("#popeye"),
     hp:150,
     hpLocation: $("#popeye-hp"),
     damage: 12
     }
-var rosie = { //maul
+var rosie = { 
     name:"rosie",
     location: $("#rosie"),
     hp:180,
@@ -39,22 +39,6 @@ var currentChar;
 var isEnemyDefeated=false;
 var enemiesLeft=3;
 var currentCharDam=0;
-
-// function initializeGame(){
-//     console.log("initialize is working");
-//     isCharChosen=false;
-//     isDefenderChosen=false;
-//     isDoneAttacking=false;
-//     isRestart=false;
-//     isEnemyDefeated=false;
-//     currentDefender="";
-//     currentChar="";
-//     for (var k=0; k<4; k++){
-//         $("#characters").append(info[k].location);
-//         $(info[k]).empty();
-//         }
-//     $("#yourChar, #enemies, #fight, #defender, #attackMsg, #restart").empty();
-//     };  
 
 $(".charBox").on("click", function(event){
     if (isCharChosen) return;
@@ -76,8 +60,7 @@ $(document).on("click", ".charBox-enemies", function(){
     if (isDoneAttacking){
         enemyDown();
     }
-    if (isDefenderChosen) {
-        return;}
+    if (isDefenderChosen) return;
     $("#attackMsg").empty();
     for (var j=0; j<4; j++){
         if (info[j].name===(event.path[1].id || event.path[2].id)){
@@ -149,9 +132,6 @@ $("#attack").on("click", function(){
     }
 
 $("#restart").on("click", function(){
-    // initializeGame();
     window.location.reload();
     });
-
-// initializeGame();
-   }); //end document.ready
+}); //end document.ready
