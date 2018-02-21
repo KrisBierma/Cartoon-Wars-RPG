@@ -37,21 +37,28 @@ var isRestart=false;
 var currentDefender;
 var currentChar;
 
+// var infoClone = Object.assign({},info);
+// var infoClone = info.slice(0);
+// console.log(infoClone);
+
 function initializeGame(){
     console.log("initialize is working");
-    currentDefender="";
-    currentChar="";
     isCharChosen=false;
     isDefenderChosen=false;
     isDoneAttacking=false;
     isRestart=false;
+    currentDefender="";
+    currentChar="";
     for (var k=0; k<4; k++){
         $("#characters").append(info[k].location);
-        console.log(info[k]);
         $(info[k]).empty();
-        console.log(info[k]);
         }
     $("#yourChar, #enemies, #fight, #defender, #attackMsg, #restart").empty();
+    // info = infoClone.concat();
+    // let infoClone = [...info];
+    // info = Object.assign({}, infoClone);
+    // console.log(info);
+    // console.log(infoClone);
     };  
 
 $(".charBox").on("click", function(event){
@@ -117,7 +124,7 @@ $("#attack").on("click", function(){
         if (isRestart){
             return;
             }
-        $("#attackMsg").html("You've been defeated...GAME OVER");
+        $("#attackMsg").html("You've been defeated...GAME OVER.");
         var restartButton=$("<button>");
         restartButton.text("Restart");
         $("#restart").append(restartButton);

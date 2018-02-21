@@ -1,7 +1,7 @@
 body{
-    background-image:url("");
+    /* background-image:url(""); */
     background-color:lightblue;
-    margin:25px;
+    margin:15px 0 0 125px;
 }
 .charBox {
     width:160px;
@@ -25,31 +25,37 @@ body{
     max-height:100px;
     margin:10px 0px;
 }
-#characters{
-    clear:both;
-    /* margin:20px; */
-}
-h1{
+#title{
+    position: absolute;
+    left:-470px;
+    top:213px;
+    background-color:white;
+    width:100%;
+    text-align: center;
+    line-height:104px;
+    -ms-transform: rotate(-90deg); 
+    -webkit-transform: rotate(-90deg); 
+    transform: rotate(-90deg);
     font-family:'Ubuntu', sans-serif;;
     font-size: 55px;
-    float:right;
-    margin-bottom:20px;
 }
-#title{display: block;}
 h2{
     font-family:'Ubuntu', sans-serif;;
     font-size:25px;
     line-height: 45px;
 }
-p{
+p, button{
     font-family:'Ubuntu', sans-serif;;
     line-height:20px;
     font-size:18px;
 }
-#yourChar, #enemies, #fight, #attackMsg{
+#yourChar, #enemies, #fight, #characters, .area{
     clear:both;
-    margin-top:15px;
 }
-.area{
-    clear:both;
+button{
+    margin-left:15px;
+}
+#attackMsg{
+    float:left;
+    padding:3px;
 }
