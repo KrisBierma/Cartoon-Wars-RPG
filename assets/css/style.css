@@ -16,7 +16,10 @@ body{
 .charBox-enemies{
     background-color:red;
 }
-.charBox-defender{background-color:black;}
+.charBox-defender{
+    background-color:black;
+    color:white;
+}
 .char{
     width:150px;
     max-height:100px;
@@ -39,15 +42,14 @@ h2{
     line-height: 45px;
 }
 p{
+    font-family:'Ubuntu', sans-serif;;
     line-height:20px;
     font-size:18px;
 }
-#pepe-hp{
-    /* font-size:100px; */
-}
-#yourChar, #enemies, #fight, #defenders{
+#yourChar, #enemies, #fight, #attackMsg{
     clear:both;
+    margin-top:15px;
 }
-#marvin{
-    /* display:none; */
+.area{
+    clear:both;
 }
