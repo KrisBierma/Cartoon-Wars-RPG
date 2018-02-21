@@ -36,6 +36,8 @@ var isDoneAttacking=false;
 var isRestart=false;
 var currentDefender;
 var currentChar;
+var isEnemyDefeated=false;
+
 
 // var infoClone = Object.assign({},info);
 // var infoClone = info.slice(0);
@@ -47,6 +49,7 @@ function initializeGame(){
     isDefenderChosen=false;
     isDoneAttacking=false;
     isRestart=false;
+    isEnemyDefeated=false;
     currentDefender="";
     currentChar="";
     for (var k=0; k<4; k++){
@@ -79,12 +82,21 @@ $(".charBox").on("click", function(event){
     }); //end .charBox click
 
 $(document).on("click", ".charBox-enemies", function(){
-    if (isDefenderChosen) return;
+    if (isDoneAttacking){
+        console.log("enemy down");
+        enemyDown();
+    }
+    if (isDefenderChosen) {
+        console.log(".charBox defender chosen");
+        return;}
+    $("#attackMsg").empty();
     for (var j=0; j<4; j++){
         if (info[j].name===(event.path[1].id || event.path[2].id)){
+            console.log("running");
             $(info[j].location).detach();
             $("#defender").append(info[j].location);
             currentDefender=info[j];
+            console.log(currentDefender);
             //defenderHp=...value; //NEED THIS
             (info[j].location).addClass("charBox-defender");
             (info[j].location).removeClass("charBox-enemies");
@@ -96,9 +108,18 @@ $(document).on("click", ".charBox-enemies", function(){
 $("#attack").on("click", function(){
     var charCapName = capFirstLetter(currentDefender.name);
     if (!isCharChosen) return;
-    if (!isDefenderChosen) return;
+    console.log(isDoneAttacking);
+    console.log(isDefenderChosen);
+    // if (isEnemyDefeated && !isDoneAttacking){
+    //     $("#attackMsg").html("No enemy here.");
+    //     console.log("no enemy");
+    //     }
+    if (!isDefenderChosen) {
+        console.log("running");
+        return;}
     if (currentChar.hp>0 && currentDefender.hp>0){
         if (isDoneAttacking) {
+            console.log("running");
             return;
             }
         else {
@@ -113,17 +134,28 @@ $("#attack").on("click", function(){
         };
 
     if (currentDefender.hp<=0 && isDoneAttacking){
+        console.log("need this?"); //delete this section?
         $("#attackMsg").html("No enemy here.");
         }
     else if(currentDefender.hp<=0){
         $("#attackMsg").html("You have defeated " + charCapName +". Choose another enemy to fight.");
         isDoneAttacking = true;
+        isEnemyDefeated=true;
         $(currentDefender.location).detach();
-        }  
+        // enemyDown();
+        console.log("running");
+    } 
+    // else if(isDoneAttacking){
+    //     console.log("enemy down");
+    //     enemyDown();
+    // }
+        
     else if (currentChar.hp<=0){
         if (isRestart){
+            console.log("running");
             return;
             }
+            console.log("running");
         $("#attackMsg").html("You've been defeated...GAME OVER.");
         var restartButton=$("<button>");
         restartButton.text("Restart");
@@ -134,7 +166,22 @@ $("#attack").on("click", function(){
     function capFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
         }    
+    // function enemyDown (){
+    //     isDefenderChosen=false;
+    //     isDoneAttacking=false;
+    //     isEnemyDefeated=false;
+    //     console.log("running");
+    //     $("#attackMsg").empty();
+    // }
     }) //end function #attack
+
+    function enemyDown (){
+        isDefenderChosen=false;
+        isDoneAttacking=false;
+        isEnemyDefeated=false;
+        console.log("running");
+        $("#attackMsg").empty();
+        }
 
 $("#restart").on("click", function(){
     initializeGame();
