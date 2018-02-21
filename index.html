@@ -12,15 +12,15 @@
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- <div ="titleBlock"> -->
+    <div id="titleBlock">
         <h1 id="title">Cartoon Wars RPG!</h1>
-    <!-- </div> -->
+    </div>
 
     <div id="characters">
-        <div class="charBox" id="marvin" value="50"><p>Marvin the Martian<img src="assets/images/marvin.jpg" alt="Marvin the Martian" class="char marvin"><p id="marvin-hp">50</div>
-        <div class="charBox" id="pepe" value="75"><p>Pepe the Cat<img src="assets/images/pepe.jpg" alt="Pepe the Cat" class="char"><p id="pepe-hp">75</div>
-        <div class="charBox" id="popeye" value="100"><p>Popeye the Sailor<img src="assets/images/popeye.png" alt="Popeye the Sailor Man" class="char"><p id="popeye-hp">100</div>
-        <div class="charBox" id="rosie" value="125"><p>Rosie the Robot<img src="assets/images/rosie-robot.jpg" alt="Rosie the Robot from the Jetsons" class="char"><p id="rosie-hp">125</div>
+        <div class="charBox" id="marvin" value="50"><p>Marvin the Martian<img src="assets/images/marvin.jpg" alt="Marvin the Martian" class="char marvin"><p id="marvin-hp">100</div>
+        <div class="charBox" id="pepe" value="75"><p>Pepe the Cat<img src="assets/images/pepe.jpg" alt="Pepe the Cat" class="char"><p id="pepe-hp">120</div>
+        <div class="charBox" id="popeye" value="100"><p>Popeye the Sailor<img src="assets/images/popeye.jpg" alt="Popeye the Sailor Man" class="char"><p id="popeye-hp">150</div>
+        <div class="charBox" id="rosie" value="125"><p>Rosie the Robot<img src="assets/images/rosie-robot.jpg" alt="Rosie the Robot from the Jetsons" class="char"><p id="rosie-hp">180</div>
     </div>
 
     <div class="area">
@@ -42,9 +42,14 @@
         <h2>Defender</h2>
         <div id="defender"></div>
         <p id=attackMsg></p>
+        <p id=winMsg></p>
         <div id="restart"></div>
     </div>
     
+    <!-- <div id="titleBlock">
+        <h1 id="title">Cartoon Wars RPG!</h1>
+    </div> -->
+
     <script src="assets/javascript/game-v2.js"></script>
 </body>
 </html>
