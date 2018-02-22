@@ -1,169 +1,137 @@
-//to start, click on char
-    //that char goes to "your char" and stays white
-    //other char go to "enemies" and turns red
 $(document).ready(function(){
 
-var marvin = $("#marvin"); 
-var pepe=$("#pepe");
-var popeye = $("#popeye");
-var rosie = $("#rosie");
-var storage=[marvin, pepe, popeye, rosie];
-var threeEnemies =[];
-var run=0;
-var isCharChosen;
-var isDefenderChosen;
+var marvin = {
+    name:"marvin",
+    location: $("#marvin"),
+    hp: 120,
+    hpLocation: $("#marvin-hp"),
+    damage: 8
+    }
+var pepe = {
+    name:"pepe",
+    location: $("#pepe"),
+    hp:130,
+    hpLocation: $("#pepe-hp"),
+    damage: 10
+    }
+var popeye = { 
+    name:"popeye",
+    location: $("#popeye"),
+    hp:150,
+    hpLocation: $("#popeye-hp"),
+    damage: 12
+    }
+var rosie = { 
+    name:"rosie",
+    location: $("#rosie"),
+    hp:180,
+    hpLocation: $("#rosie-hp"),
+    damage: 15
+    }
 
-function initializeGame(){
-    isCharChosen=false;
-    isDefenderChosen=false;
-    $("#enemies", "#fight", "#defender").empty();
-}
+var info=[marvin, pepe, popeye, rosie]; //array of above character objects 
+var isCharChosen=false;
+var isDefenderChosen=false;
+var isDoneAttacking=false;
+var isRestart=false;
+var currentDefender;
+var currentChar;
+var isEnemyDefeated=false;
+var enemiesLeft=3;
+var currentCharDam=0;
 
-chooseYourChar();
-//chooseDefender();
-
-function chooseYourChar(){
-    //var run=0;
-    $("#marvin").on("click", function(){
-        while(run<3){
-            for (var i=0; i<4; i++){
-                $(storage[i]).detach();
-            
-                if (storage[i]===marvin){
-                    $("#yourChar").append(storage[i])
-                }
-                else {
-                    storage[i].addClass("charBox-enemies");
-                    $("#enemies").append(storage[i]);
-                    threeEnemies[i]=storage[i];
-                    console.log(threeEnemies);
-                    run++;
-                    console.log(run);
-                    }
+$(".charBox").on("click", function(event){
+    if (isCharChosen) return;
+    for (var i=0; i<4; i++){
+        $(info[i].location).detach();
+        if (info[i].name===event.currentTarget.id){
+            $("#yourChar").append(info[i].location);
+            currentChar=info[i];
+            isCharChosen=true;
+        }
+        else {
+            (info[i].location).addClass("charBox-enemies");
+            $("#enemies").append(info[i].location);
             }
-            chooseDefender();
-        }})
+        }
+    }); //end .charBox click
 
-    $("#pepe").on("click", function(){
-        while(run<3){
-            for (var i=0; i<4; i++){
-                $(storage[i]).detach();
-                
-                if (storage[i]===pepe){
-                    $("#yourChar").append(storage[i])
-                }
-                else {
-                    storage[i].addClass("charBox-enemies");
-                    $("#enemies").append(storage[i]);
-                    threeEnemies[i]=storage[i];
-                    console.log(threeEnemies);
-                    run++;
-                    console.log(run);        }}
-            chooseDefender();
-                }})
+$(document).on("click", ".charBox-enemies", function(){
+    if (isDoneAttacking){
+        enemyDown();
+    }
+    if (isDefenderChosen) return;
+    $("#attackMsg").empty();
+    for (var j=0; j<4; j++){
+        if (info[j].name===(event.path[1].id || event.path[2].id)){
+            $(info[j].location).detach();
+            $("#defender").append(info[j].location);
+            currentDefender=info[j];
+            (info[j].location).addClass("charBox-defender");
+            (info[j].location).removeClass("charBox-enemies");
+            isDefenderChosen=true;      
+            }   
+        }
+    }); //end .charBox-enemies click
 
-    $("#popeye").on("click", function(){
-        while(run<3){
-            for (var i=0; i<4; i++){
-            $(storage[i]).detach();
-            
-            if (storage[i]===popeye){
-                $("#yourChar").append(storage[i])
+$("#attack").on("click", function(){
+    var charCapName = capFirstLetter(currentDefender.name);
+    currentCharDam = currentCharDam + currentChar.damage;
+    if (!isCharChosen) return;
+    if (!isDefenderChosen) return;
+    if (currentChar.hp>0 && currentDefender.hp>0){
+        if (isDoneAttacking) return; 
+        else {
+            $("#attackMsg").html("You attacked " + charCapName +" for " + currentCharDam + " damage." + "<br>"
+            + charCapName + " attacked you back for " + currentDefender.damage + " damage.");
+            currentChar.hp = currentChar.hp - currentDefender.damage;  
+            $(currentChar.hpLocation).text(currentChar.hp);
+            currentDefender.hp = currentDefender.hp - currentCharDam;
+            $(currentDefender.hpLocation).text(currentDefender.hp);
             }
-            else {
-                storage[i].addClass("charBox-enemies");
-                $("#enemies").append(storage[i]);
-                threeEnemies[i]=storage[i];
-                run++;
-        }}
-        chooseDefender();
-        }})
+        };
 
-    $("#rosie").on("click", function(){
-        while(run<3){
-            for (var i=0; i<4; i++){
-            $(storage[i]).detach();
-            
-            if (storage[i]===rosie){
-                $("#yourChar").append(storage[i])
-            }
-            else {
-                storage[i].addClass("charBox-enemies");
-                $("#enemies").append(storage[i]);
-                threeEnemies[i]=storage[i];
-                run++;
-        }}}
-        chooseDefender();
-        })
-    } //end chooseYourChar function
-
-function chooseDefender(){ 
-    $("#marvin").on("click", function(){
-        console.log("running");   
-        if (threeEnemies[0]===undefined){
-            console.log("can't do this");
+    if (currentDefender.hp<=0 && isDoneAttacking){
+        $("#attackMsg").html("No enemy here.");
         }
-        else {
-            storage[0].addClass("charBox-fight");
-            $(storage[0]).detach();
-            $("#fight").append(storage[0]);
+    else if(currentDefender.hp<=0){
+        $("#attackMsg").html("You have defeated " + charCapName +". Choose another enemy to fight.");
+        enemiesLeft--;
+        anyEnemiesLeft();
+        isDoneAttacking = true;
+        isEnemyDefeated=true;
+        $(currentDefender.location).detach();
+        }   
+    else if (currentChar.hp<=0){
+        if (isRestart) return;
+        $("#attackMsg").html("You've been defeated...GAME OVER.");
+        var restartButton=$("<button>");
+        restartButton.text("Restart");
+        $("#restart").append(restartButton);
+        isRestart=true;
+        };
+
+    function capFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+        }    
+    }) //end function #attack
+
+    function enemyDown (){
+        isDefenderChosen=false;
+        isDoneAttacking=false;
+        isEnemyDefeated=false;
+        $("#attackMsg").empty();
         }
-        })
 
-    $("#pepe").on("click", function(){
-        console.log("running");   
-        if (threeEnemies[1]===undefined){
-            console.log("can't do this");
+    function anyEnemiesLeft (){
+        if (enemiesLeft===0){
+            $("#attackMsg").empty();
+            $("#winMsg").html("You have defeated all enemies! You win!");
+            $("#attack").remove();
         }
-        else {
-            storage[1].addClass("charBox-fight");
-            $(storage[1]).detach();
-            $("#fight").append(storage[1]);
-        }
-       })
+    }
 
-    $("#popeye").on("click", function(){
-        console.log("running");   
-        if (threeEnemies[2]===undefined){
-            console.log("can't do this");
-        }
-        else {
-            storage[2].addClass("charBox-fight");
-            $(storage[2]).detach();
-            $("#fight").append(storage[2]);
-        }
-       })
-
-    $("#rosie").on("click", function(){
-        console.log("running");   
-        if (threeEnemies[3]===undefined){
-            console.log("can't do this");
-        }
-        else {
-            storage[3].addClass("charBox-fight");
-            $(storage[3]).detach();
-            $("#fight").append(storage[3]);
-        }
-        })
-
-    } //end chooseDefender function
-
-//cycle through threeEnemies array and move one click to #fight????? do i need threeEnemies
-//stop chooseDefender function
-
-initializeGame();
-   }) //end document.ready
-
-//click attack
-//reduce hp of char and defender
-//if char hp =0, lose game; "You've been defeated...GAME OVER" & button "restart"
-//marvin damage 8, pepe damage 12, popeye damage 16, rosie damage 20
-//script shows up "You attacked snoopy for 8 damage. <br> snoopy attacked you back for 25 damage"
-//each attack, char increase attack by that number 8, 16, 24. enemy attack stays the same 25
-//if enemy hp is 0 it's removed.
-//text reads "You have defeated Marvin. Choose another enemy to fight."
-//if attack is clicked again "No enemy here."
-//choose another character
-//char attack power is still increasing
-//You won! Game over & restart button
-
+$("#restart").on("click", function(){
+    window.location.reload();
+    });
+}); //end document.ready
