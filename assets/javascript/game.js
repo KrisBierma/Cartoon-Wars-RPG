@@ -19,14 +19,14 @@ var popeye = {
     location: $("#popeye"),
     hp:150,
     hpLocation: $("#popeye-hp"),
-    damage: 12
+    damage: 18
     }
 var rosie = { 
     name:"rosie",
     location: $("#rosie"),
     hp:180,
     hpLocation: $("#rosie-hp"),
-    damage: 15
+    damage: 25
     }
 
 var info=[marvin, pepe, popeye, rosie]; //array of above character objects 
