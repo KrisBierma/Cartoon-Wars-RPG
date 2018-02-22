@@ -54,9 +54,9 @@ h2{
     font-size:25px;
     line-height: 45px;
 }
-p, button{
+p, button, ol, li{
     font-family:'Ubuntu', sans-serif;;
-    line-height:20px;
+    line-height:25px;
     font-size:18px;
 }
 #yourChar, #enemies, #fight, #characters, .area{
@@ -75,3 +75,21 @@ button{
     margin-top:25px;
     margin-left:20px;
 }
+#directions{
+    width: 625px;
+    background-color:green;
+    padding:15px;
+}
+ol{
+    list-style-type:decimal;
+}
+li{
+    list-style-position: inside;
+    margin-left:10px;
+    padding:5px;
+}
+li::before {
+    content: "";
+    width: 10px;
+    display: inline-block;
+  }
